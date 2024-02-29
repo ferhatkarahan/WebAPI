@@ -30,7 +30,7 @@ namespace Business.Concretes
             _brandDal.Add(brand);
 
             //mapping
-            CreatedBrandResponse createBrandResponse = new CreatedBrandResponse();
+            CreatedBrandResponse createBrandResponse = new();
             createBrandResponse.Name = brand.Name;
             createBrandResponse.Id = 4;
             createBrandResponse.CreatedDate = brand.CreatedDate;
@@ -41,7 +41,17 @@ namespace Business.Concretes
 
         public List<GetAllBrandResponse> GetAll()
         {
-            throw new NotImplementedException();
+           List<Brand> brands= _brandDal.GetAll();
+           List<GetAllBrandResponse> getAllBrandResponses = new ();
+            foreach (var brand in brands)
+            {
+                GetAllBrandResponse getAllBrandResponse = new ();
+                getAllBrandResponse.Name = brand.Name;
+                getAllBrandResponse.Id= brand.Id;
+                getAllBrandResponse.CreatedDate= brand.CreatedDate;
+                getAllBrandResponses.Add(getAllBrandResponse);
+            }
+            return getAllBrandResponses;
         }
     }
 }
